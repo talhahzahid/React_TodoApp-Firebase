@@ -1,27 +1,15 @@
-// import {  onAuthStateChanged } from "firebase/auth";
-// import { auth } from "../Config/firebase/firsebase";
+
 import React, { useRef, useState } from 'react'
 
 
 const Home = () => {
   const todo = useRef();
-  const [todoRender , setTodo] = useState(null)
+  let [todoRender , setTodos] = useState([]);
    
-  // function checkUser(){
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       const uid = user.uid;
-  //       console.log(uid);
-  //     } else {
-  //       alert('login')
-  //     }
-  //   });
-  // }
-  // checkUser()
-
   const addTodo = (event) => {
     event.preventDefault();
-    console.log(todo.current.value);
+    todoRender.push(todo.current.value)
+    setTodos([...todoRender])
     todo.current.value = ''
   }
 
@@ -39,7 +27,11 @@ const Home = () => {
           <button className="btn btn-info mt-5">Add Todo</button>
         </form>
       </div>
-      
+      {todoRender.map((item, index) => (
+        <div key={index} className='text-center'>
+          <li>{item}</li> 
+        </div>
+      ))}
     </>
   )
 }
