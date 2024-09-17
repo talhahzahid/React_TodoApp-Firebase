@@ -11,7 +11,21 @@ const Home = () => {
     todoRender.push(todo.current.value)
     setTodos([...todoRender])
     todo.current.value = ''
+  } 
+  const deleteTodo = (index)=>{
+    console.log("delete" , index);
+    todoRender.splice(index , 1)
+    setTodos([...todoRender])
   }
+  
+  const editTodo = (index)=>{
+    console.log("edit" , index);
+    const editVal = prompt("Enter Todo");
+    todoRender.splice(index , 1 , editVal)
+    setTodos([...todoRender])
+    
+}
+
 
   return (
     <>
@@ -28,10 +42,12 @@ const Home = () => {
         </form>
       </div>
       {todoRender.map((item, index) => (
-        <div key={index} className='text-center'>
+        <div key={index} className='text-center flex justify-center gap-5 mt-3'>
           <li>{item}</li> 
+          <button onClick={()=> editTodo(index)} className="btn btn-success ">Edit</button>
+          <button onClick={()=> deleteTodo(index)} className="btn btn-error">Delete</button>
         </div>
-      ))}
+      ))} 
     </>
   )
 }
